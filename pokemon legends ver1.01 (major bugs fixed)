@@ -1,4 +1,4 @@
-"""Note: All comments are written in the form of strings. Comments starting with # means scrapped code."""
+"""Note: All comments are written in the form of strings. Grey means scrapped code."""
 
 
 
@@ -45,8 +45,9 @@ def run_game():
     global zacian,miraidon
     global window,pokemon1,pokemon2
     create_window()
-    log_stats()
+    
     load_resources()
+    log_stats()
     init_dialogue()
     pokemon_battle(pokemon1,pokemon2,zacian,miraidon,pokemon1.name,pokemon2.name,"Zacian","Miraidon")
     window.mainloop()
@@ -89,7 +90,7 @@ def load_resources():
     try:
         load=Label(window,text="LOADING RESOURCES.....")
         load.pack()
-        time.sleep(randint(5,8))
+        sleep(randint(5,8))
         load_pics()
         load_bg()
         load.pack_forget()
@@ -983,6 +984,10 @@ def lose():
 
 
 def log_stats():
+    global disp_cresselia,disp_darkrai,disp_deoxys,disp_dialga,disp_entei,disp_giratina
+    global disp_mewtwo,disp_groudon,disp_kyogre,disp_kyurem,disp_lugia,disp_raikou,disp_suicune
+    global disp_palkia,disp_reshiram,disp_rayquaza,disp_zekrom,disp_zygarde,disp_xerneas,mega_mewtwo,mega_rayquaza,mega_reshiram
+    global mega_zacian,mega_zekrom,mega_zygarde,picmiraidon,piczacian
     global Psycho_Cut#Move("Psychoglobal Cut",global 100,None)
     global Psycho_Blast#Move("Psychoglobal blast",120,"mega")
     global Original_Power#Move("Originalglobal Power",70,None)
@@ -1141,7 +1146,7 @@ def log_stats():
     lugia=Pokemon(680,680,90,154,Aeroblast,Dragon_Rush,Hydro_Pump,Sky_Attack,disp_lugia,None)#"psychic","flying",100,100,110,140,None,"para",None,"para")
     entei=Pokemon(580,580,115,85,Eruption,Sacred_Fire,Extrasensory,Scorching_sands,disp_entei,None)
     raikou=Pokemon(580,580,85,100,Zap_Cannon,Aura_Sphere,Supercell_Slam,Extrasensory,disp_raikou,None)
-    suicune=Pokemon(580,580,90,115,Blizzard,Sheer_cold,Surf,Extrasensory,disp_suicune,None)#")"water",None,110,400*random(),90,80,"freeze","freeze",None,None
+    suicune=Pokemon(580,580,90,115,Blizzard,Sheer_cold,Surf,Extrasensory,disp_suicune,None)#")#"water",None,110,400*random(),90,80,"freeze","freeze",None,None
     groudon=Pokemon(670,670,150,140,Precipice_Blades,Eruption,Solar_Beam,Hammer_Arm,disp_groudon,None)
     kyogre=Pokemon(670,670,150,140,Muddy_water,Origin_Pulse,Water_Spout,Ice_Beam,disp_kyogre,None)#","water",None,90,110,150,90,None,None,None,"freeze")
     rayquaza=Pokemon(680,680,150,90,Dragon_Acsent,Draco_Meteor,Storm,Hyper_Beam,disp_rayquaza,mega_rayquaza)#"dragon","flying",120,130,110,150,None,"pwup","para",None)
@@ -1163,6 +1168,9 @@ def log_stats():
 
 """run the whole game loop"""
 
-
-run_game()
-
+try:
+    run_game()
+except ModuleNotFoundError:
+    print("Please install pygame before playing.")
+except TclError:
+    print("Please load all the picture files in the repository.")
