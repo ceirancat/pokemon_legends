@@ -1,3 +1,4 @@
+"""Note: All comments are written in the form of strings. Grey means scrapped code."""
 
 
 
@@ -509,6 +510,12 @@ def load_pics():
     i_lugia=ImageTk.PhotoImage(lugia_pil)
     
     disp_lugia=Label(window,image=i_lugia)
+    
+    img_diancie=cv2.imread(filename="diancie.png")
+    diancie_pil=img.fromarray(img_diancie)
+    i_diancie=ImageTk.PhotoImage(diancie_pil)
+    
+    disp_diancie=Label(window,image=i_diancie)
     
     megamewtwo=cv2.imread(filename="mega mewtwo.png")
     
@@ -1071,7 +1078,7 @@ def log_stats():
     global disp_cresselia,disp_darkrai,disp_deoxys,disp_dialga,disp_entei,disp_giratina
     global disp_mewtwo,disp_groudon,disp_kyogre,disp_kyurem,disp_lugia,disp_raikou,disp_suicune
     global disp_palkia,disp_reshiram,disp_rayquaza,disp_zekrom,disp_zygarde,disp_xerneas,mega_mewtwo,mega_rayquaza,mega_reshiram
-    global mega_zacian,mega_zekrom,mega_zygarde,picmiraidon,piczacian
+    global mega_zacian,mega_zekrom,mega_zygarde,picmiraidon,piczacian,disp_diancie
     global Psycho_Cut#Move("Psychoglobal Cut",global 100,None)
     global Psycho_Blast#Move("Psychoglobal blast",120,"mega")
     global Original_Power#Move("Originalglobal Power",70,None)
@@ -1154,6 +1161,7 @@ def log_stats():
     global cresselia#Pokemon(600,600,75,130,Moonblast,Future_Sight,Lunar_Blessing,Lunar_Dance,disp_cresselia,None)#","psychic",None,95,120,0,0,"pwdn",None,"completeglobal restore","restore")
     global zekrom#Pokemon(680,680,150,120,Bolt_Strike,Fusion_Bolt,Draco_Meteor,Scale_Shot,disp_zekrom,mega_zekrom)#","electric","dragon",130,100,130,45*randint(1,5),"para","para","pwup",None)
     global reshiram#Pokemon(680,global 680,150,120,Blue_Flare,Fusion_Flame,Draco_Meteor,Overheat,disp_reshiram,mega_reshiram)#","fire","dragon",130,100,130,130,"flame","flame","pwup","pwdn")
+    global diancie
     global kyurem#Pokemon(660,660,170,100,Glaciate,Blizzard,Stone_Edge,Draco_Meteor,disp_kyurem,None)#","ice","dragon",90,110,100,130,"pwdn","freeze",None,"pwup")
     global xerneas#Pokemon(680,680,131,98,Geomancy,Moonblast,Close_Combat,Thunder,disp_xerneas,None)#","fairy",None,50,95,120,110,("restore"global andglobal "pwup"),global "pwdn","pwdn","para")
     global zygarde#Pokemon(708,708,100,216,Lands_Wrath,Thousand_Arrows,Thousand_Waves,Core_Enforcer,disp_zygarde,mega_zygarde)#","ground","dragon",90,135,90,100,"pwdn","pwup","para","pwdn")
@@ -1225,7 +1233,7 @@ def log_stats():
     Electro_Drift=Move("Electro Drift",100,"para")
     Outrage=Move("Outrage",160,None)
     Solar_Blade=Move("Solar Blade",120,"burn")
-    
+    Diamond_Storm=Move("Diamond storm",200,"mega")
     mewtwo=Pokemon(680, 680, 154, 90, Psycho_Cut,Psycho_Blast,Original_Power,Life_Dew,disp_mewtwo,mega_mewtwo)# 90, 100, 60, 0, None, None, "pwup", "restore")
     lugia=Pokemon(680,680,90,154,Aeroblast,Dragon_Rush,Hydro_Pump,Sky_Attack,disp_lugia,None)#"psychic","flying",100,100,110,140,None,"para",None,"para")
     entei=Pokemon(580,580,115,85,Eruption,Sacred_Fire,Extrasensory,Scorching_sands,disp_entei,None)
@@ -1242,6 +1250,7 @@ def log_stats():
     cresselia=Pokemon(600,600,75,130,Moonblast,Future_Sight,Lunar_Blessing,Lunar_Dance,disp_cresselia,None)#","psychic",None,95,120,0,0,"pwdn",None,"complete restore","restore")
     zekrom=Pokemon(680,680,150,120,Bolt_Strike,Fusion_Bolt,Draco_Meteor,Scale_Shot,disp_zekrom,mega_zekrom)#","electric","dragon",130,100,130,45*randint(1,5),"para","para","pwup",None)
     reshiram=Pokemon(680, 680,150,120,Blue_Flare,Fusion_Flame,Draco_Meteor,Overheat,disp_reshiram,mega_reshiram)#","fire","dragon",130,100,130,130,"flame","flame","pwup","pwdn")
+    diancie=Pokemon(700,700,130,120,Meteor_Beam,Stone_Edge,Diamond_Storm,Moonblast,disp_diancie,mega_diancie)
     kyurem=Pokemon(660,660,170,100,Glaciate,Blizzard,Stone_Edge,Draco_Meteor,disp_kyurem,None)#","ice","dragon",90,110,100,130,"pwdn","freeze",None,"pwup")
     xerneas=Pokemon(680,680,131,98,Geomancy,Moonblast,Close_Combat,Thunder,disp_xerneas,None)#","fairy",None,50,95,120,110,("restore" and "pwup"), "pwdn","pwdn","para")
     zygarde=Pokemon(708,708,100,216,Lands_Wrath,Thousand_Arrows,Thousand_Waves,Core_Enforcer,disp_zygarde,mega_zygarde)#","ground","dragon",90,135,90,100,"pwdn","pwup","para","pwdn")
@@ -1254,3 +1263,4 @@ def log_stats():
 
 
 run_game()
+
