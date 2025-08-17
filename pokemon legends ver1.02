@@ -1,10 +1,10 @@
-"""Note: All comments are written in the form of strings. Grey means scrapped code."""
 
 
 
 """initial settings"""
 
-
+import cv2
+from PIL import Image as img, ImageTk
 from tkinter import *
 from pygame import *
 from random import *
@@ -392,58 +392,142 @@ def init_dialogue():
             
           
 def load_pics():
+    
     global disp_cresselia,disp_darkrai,disp_deoxys,disp_dialga,disp_entei,disp_giratina
     global disp_mewtwo,disp_groudon,disp_kyogre,disp_kyurem,disp_lugia,disp_raikou,disp_suicune
     global disp_palkia,disp_rayquaza,disp_zekrom,disp_zygarde,disp_xerneas,mega_mewtwo,mega_rayquaza,mega_reshiram
     global mega_zacian,mega_zekrom,mega_zygarde,picmiraidon,piczacian
-    img_mewtwo=PhotoImage(file="mewtwo.png")
-    disp_mewtwo=Label(window,image=img_mewtwo)    
-    img_entei=PhotoImage(file="entei.png")
-    disp_entei=Label(window,image=img_entei)
-    img_suicune=PhotoImage(file="suicune.png")
-    disp_suicune=Label(window,image=img_suicune)
-    img_raikou=PhotoImage(file="raikou.png")
-    disp_raikou=Label(window,image=img_raikou)
-    img_groudon=PhotoImage(file="groudon.png")
-    disp_groudon=Label(window,image=img_groudon)
-    img_kyogre=PhotoImage(file="kyogre.png")
-    disp_kyogre=Label(window,image=img_kyogre)
-    img_rayquaza=PhotoImage(file="rayquaza.png")
-    disp_rayquaza=Label(window,image=img_rayquaza)
-    img_deoxys=PhotoImage(file="deoxys.png")
-    disp_deoxys=Label(window,image=img_deoxys)
-    img_palkia=PhotoImage(file="palkia.png")
-    disp_palkia=Label(window,image=img_palkia)
-    img_dialga=PhotoImage(file="dialga.png")
-    disp_dialga=Label(window,image=img_dialga)
-    img_giratina=PhotoImage(file="giratina.png")
-    disp_giratina=Label(window,image=img_giratina)
-    img_darkrai=PhotoImage(file="darkrai.png")
-    disp_darkrai=Label(window,image=img_darkrai)
-    img_cresselia=PhotoImage(file="cresselia.png")
-    disp_cresselia=Label(window,image=img_cresselia)
-    img_zekrom=PhotoImage(file="zekrom.png")
-    disp_zekrom=Label(window,image=img_zekrom)
-    img_reshiram=PhotoImage(file="reshiram.png")
-    disp_reshiram=Label(window,image=img_reshiram)
-    img_kyurem=PhotoImage(file="kyurem.png")
-    disp_kyurem=Label(window,image=img_kyurem)
-    img_xerneas=PhotoImage(file="xerneas.png")
-    disp_xerneas=Label(window,image=img_xerneas)
-    img_zygarde=PhotoImage(file="zygarde.png")
-    disp_zygarde=Label(window,image=img_zygarde)
-    img_lugia=PhotoImage(file="lugia.png")
-    disp_lugia=Label(window,image=img_lugia)
-    megamewtwo=PhotoImage(file="mega mewtwo.png")
+    img_mewtwo=cv2.imread(filename="mewtwo.png.png")
+    mewtwo_pil=img.fromarray(img_mewtwo)
+    i_mewtwo=ImageTk.PhotoImage(mewtwo_pil)
+    disp_mewtwo=Label(window,image=i_mewtwo) 
+    
+    img_entei=cv2.imread(filename="entei.png")
+    entei_pil=img.fromarray(img_entei)
+    i_entei=ImageTk.PhotoImage(entei_pil)
+    
+    disp_entei=Label(window,image=i_entei)
+    
+    img_suicune=cv2.imread(filename="suicune.png")
+    suicune_pil=img.fromarray(img_suicune)
+    i_suicune=ImageTk.PhotoImage(suicune_pil)
+    
+    disp_suicune=Label(window,image=i_suicune)
+    
+    img_raikou=cv2.imread(filename="raikou.png")
+    raikou_pil=img.fromarray(img_raikou)
+    i_raikou=ImageTk.PhotoImage(raikou_pil)
+    
+    disp_raikou=Label(window,image=i_raikou)
+    
+    img_groudon=cv2.imread(filename="groudon.png")
+    groudon_pil=img.fromarray(img_groudon)
+    i_groudon=ImageTk.PhotoImage(groudon_pil)
+    
+    disp_groudon=Label(window,image=i_groudon)
+    
+    img_kyogre=cv2.imread(filename="kyogre.png")
+    kyogre_pil=img.fromarray(img_kyogre)
+    i_kyogre=ImageTk.PhotoImage(kyogre_pil)
+    
+    disp_kyogre=Label(window,image=ikyogre)
+    
+    img_rayquaza=cv2.imread(filename="rayquaza.png")
+    rayquaza_pil=img.fromarray(img_rayquaza)
+    i_rayquaza=ImageTk.PhotoImage(rayquaza_pil)
+    
+    disp_rayquaza=Label(window,image=i_rayquaza)
+    
+    img_deoxys=cv2.imread(filename="deoxys.png")
+    deoxys_pil=img.fromarray(img_deoxys)
+    i_deoxys=ImageTk.PhotoImage(deoxys_pil)
+    
+    disp_deoxys=Label(window,image=i_deoxys)
+    
+    img_palkia=cv2.imread(filename="palkia.png")
+    palkia_pil=img.fromarray(img_palkia)
+    i_palkia=ImageTk.PhotoImage(palkia_pil)
+    
+    disp_palkia=Label(window,image=i_palkia)
+    
+    img_dialga=cv2.imread(filename="dialga.png")
+    dialga_pil=img.fromarray(img_dialga)
+    i_dialga=ImageTk.PhotoImage(dialga_pil)
+    
+    disp_dialga=Label(window,image=i_dialga)
+    
+    img_giratina=cv2.imread(filename="giratina.png")
+    giratina_pil=img.fromarray(img_giratina)
+    i_giratina=ImageTk.PhotoImage(giratina_pil)
+    
+    disp_giratina=Label(window,image=i_giratina)
+    
+    img_darkrai=cv2.imread(filename="darkrai.png")
+    darkrai_pil=img.fromarray(img_darkrai)
+    i_darkrai=ImageTk.PhotoImage(darkrai_pil)
+    
+    disp_darkrai=Label(window,image=i_darkrai)
+    
+    img_cresselia=cv2.imread(filename="cresselia.png")
+    cresselia_pil=img.fromarray(img_cresselia)
+    i_cresselia=ImageTk.PhotoImage(cresselia_pil)
+    
+    disp_cresselia=Label(window,image=i_cresselia)
+    
+    img_zekrom=cv2.imread(filename="zekrom.png")
+    zekrom_pil=img.fromarray(img_zekrom)
+    i_zekrom=ImageTk.PhotoImage(zekrom_pil)
+    
+    disp_zekrom=Label(window,image=i_zekrom)
+    
+    img_reshiram=cv2.imread(filename="reshiram.png")
+    reshiram_pil=img.fromarray(img_reshiram)
+    i_reshiram=ImageTk.PhotoImage(reshiram_pil)
+    
+    disp_reshiram=Label(window,image=i_reshiram)
+    
+    img_kyurem=cv2.imread(filename="kyurem.png")
+    kyurem_pil=img.fromarray(img_kyurem)
+    i_kyurem=ImageTk.PhotoImage(kyurem_pil)
+    
+    disp_kyurem=Label(window,image=i_kyurem)
+    
+    img_xerneas=cv2.imread(filename="xerneas.png")
+    xerneas_pil=img.fromarray(img_xerneas)
+    i_xerneas=ImageTk.PhotoImage(xerneas_pil)
+    
+    disp_xerneas=Label(window,image=i_xerneas)
+    
+    img_zygarde=cv2.imread(filename="zygarde.png")
+    zygarde_pil=img.fromarray(img_zygarde)
+    i_zygarde=ImageTk.PhotoImage(zygarde_pil)
+    
+    disp_zygarde=Label(window,image=i_zygarde)
+    
+    img_lugia=cv2.imread(filename="lugia.png")
+    lugia_pil=img.fromarray(img_lugia)
+    i_lugia=ImageTk.PhotoImage(lugia_pil)
+    
+    disp_lugia=Label(window,image=i_lugia)
+    
+    megamewtwo=cv2.imread(filename="mega mewtwo.png")
+    
+    
     mega_mewtwo=Label(window,image=megamewtwo)
-    megaray=PhotoImage(file="mega rayquaza.png")
+    
+    megaray=cv2.imread(filename="mega rayquaza.png")
+    
+    
     mega_rayquaza=Label(window,image=megaray)
+    
+    
+    
     mega_zekrom=Label(window,image=PhotoImage(file="mega zekrom.png"))
     mega_reshiram=Label(window,image=PhotoImage(file="mega reshiram.png"))
     mega_zygarde=Label(window,image=PhotoImage(file="zygarde complete.png"))
     piczacian=Label(window,image=PhotoImage(file="zacian.png"))
     mega_zacian=Label(window,image=PhotoImage(file="zacian crowned.png"))
-    picmiraidon=Label(window,image=PhotoImage(file="miraidon.png"))
+    picmiraidon=Label(window,image=PhotoImage(file="miraidon1.png"))
     
     
 """loading the battle background; will be added by ver1.2"""    
@@ -1168,9 +1252,5 @@ def log_stats():
 
 """run the whole game loop"""
 
-try:
-    run_game()
-except ModuleNotFoundError:
-    print("Please install pygame before playing.")
-except TclError:
-    print("Please load all the picture files in the repository.")
+
+run_game()
