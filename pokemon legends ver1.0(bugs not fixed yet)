@@ -1,0 +1,1168 @@
+"""Note: All comments are written in the form of strings. Comments starting with # means scrapped code."""
+
+
+
+"""initial settings"""
+
+
+from tkinter import *
+from pygame import *
+from random import *
+from time import *
+status=None
+init()
+global a_click
+global b_click
+global name
+global poke1
+global poke2
+poke1=None
+poke2=None
+a_click=False
+b_click=False
+
+def pprint(text,x,y):
+    re=Label(window,text=text)
+    re.place(x=x,y=y)
+    while True:
+        if a_click==True:
+            re.pack_forget()
+            break
+        else:
+            continue
+def on_a_click(): 
+    a_click=True
+    
+def on_b_click():
+    b_click=True
+
+    
+
+"""defining game procedure"""
+
+
+def run_game():
+    global zacian,miraidon
+    global window,pokemon1,pokemon2
+    create_window()
+    log_stats()
+    load_resources()
+    init_dialogue()
+    pokemon_battle(pokemon1,pokemon2,zacian,miraidon,pokemon1.name,pokemon2.name,"Zacian","Miraidon")
+    window.mainloop()
+ 
+    
+"""creating the game window"""
+    
+ 
+    
+def create_window():
+    global window
+    global a_click
+    global b_click
+    window=Tk()
+    window.geometry("700x500")
+    window.title("Pokemon Legends")
+    init_text=("[PRESS A TO START]")
+    trigger=Label(window,text=init_text)
+    trigger.place(x=250,y=150)
+    A=Button(text="A",bg="lightblue",command=on_a_click,height=2,width=3)
+    B=Button(text="B",bg="lightblue",command=on_b_click,height=2,width=3)
+    A.place(x=600,y=200)
+    B.place(x=600,y=300)
+
+    if a_click==True:
+        trigger=0
+        a_click=False
+        trigger.pack_forget()
+        #reak
+    else:
+        pass
+        
+        #continue
+
+
+"""defining picture-loading procedure"""
+
+
+def load_resources():
+    try:
+        load=Label(window,text="LOADING RESOURCES.....")
+        load.pack()
+        time.sleep(randint(5,8))
+        load_pics()
+        load_bg()
+        load.pack_forget()
+        load=Label(window,text="LOAD COMPLETE. PRESS A TO START THE GAME.")
+        load.pack()
+        load.pack_forget()
+    except:
+        raise SyntaxError("An glitch has occurred due to pictures not in the user's computer. Please contact the creator for more information.")
+
+"""choose 2 pokemon using WASD"""
+
+
+def init_dialogue():
+    global poke1
+    global poke2
+    global config1
+    global config2
+    global pokemon1
+    global pokemon2
+    global mewtwo#Pokemon(680,global 680,global 154,global 90,global Psycho_Cut,Psycho_Blast,Original_Power,Life_Dew,disp_mewtwo,mega_mewtwo)#global 90,global 100,global 60,global 0,global None,global None,global "pwup",global "restore")
+    global lugia#Pokemon(680,680,90,154,Aeroblast,Dragon_Rush,Hydro_Pump,Sky_Attack,disp_lugia,None)#"psychic","flying",100,100,110,140,None,"para",None,"para")
+    global entei#Pokemon(580,580,115,85,Eruption,Sacred_Fire,Extrasensory,Scorching_sands,disp_entei,None)
+    global raikou#Pokemon(580,580,85,100,Zap_Cannon,Aura_Sphere,Supercell_Slam,Extrasensory,disp_raikou,None)
+    global suicune#Pokemon(580,580,90,115,Blizzard,Sheer_cold,Surf,Extrasensory,disp_suicune,None)#")#"water",None,110,400*random(),90,80,"freeze","freeze",None,None
+    global groudon#Pokemon(670,670,150,140,Precipice_Blades,Eruption,Solar_Beam,Hammer_Arm,disp_groudon,None)
+    global kyogre#Pokemon(670,670,150,140,Muddy_water,Origin_Pulse,Water_Spout,Ice_Beam,disp_kyogre,None)#","water",None,90,110,150,90,None,None,None,"freeze")
+    global rayquaza#Pokemon(680,680,150,90,Dragon_Acsent,Draco_Meteor,Storm,Hyper_Beam,disp_rayquaza,mega_rayquaza)#"dragon","flying",120,130,110,150,None,"pwup","para",None)
+    global deoxys#Pokemon(600,600,180,160,Psycho_Boost,Hyper_Beam,Meteor_Beam,Focus_Blast,disp_deoxys,None)#","psychic",None,140,150,120,120,"pwdn",None,"pwup","pwdn")
+    global palkia#Pokemon(680,680,150,120,Earth_Power,Spacial_Rend,Hydro_Pump,Ice_Beam,disp_palkia,None)#","water","dragon",90,150,110,90,"pwdn","pwdn",None,"freeze")
+    global dialga#Pokemon(680,global 680,global 150,global 120,Roar_Of_Time,Iron_Tail,Flash_Cannon,Blizzard,disp_dialga,None)#","steel","dragon",150,100,80,110,None,"pwdn","pwdn","freeze")
+    global giratina#Pokemon(680,680,120,120,Shadow_Force,Aura_Sphere,Stone_Edge,Poltergeist,disp_giratina,None)#","ghost","dragon",120,80,100,110,"pwdn",None,"pwup","para")
+    global darkrai#Pokemon(600,600,135,90,Dream_Eater,Dark_void,Thunder,Sludge_Bomb,disp_darkrai,None)#","dark",None,100,0,110,90,"sleep","deepglobal sleep","para","poison")
+    global cresselia#Pokemon(600,600,75,130,Moonblast,Future_Sight,Lunar_Blessing,Lunar_Dance,disp_cresselia,None)#","psychic",None,95,120,0,0,"pwdn",None,"completeglobal restore","restore")
+    global zekrom#Pokemon(680,680,150,120,Bolt_Strike,Fusion_Bolt,Draco_Meteor,Scale_Shot,disp_zekrom,mega_zekrom)#","electric","dragon",130,100,130,45*randint(1,5),"para","para","pwup",None)
+    global reshiram#Pokemon(680,global 680,150,120,Blue_Flare,Fusion_Flame,Draco_Meteor,Overheat,disp_reshiram,mega_reshiram)#","fire","dragon",130,100,130,130,"flame","flame","pwup","pwdn")
+    global kyurem#Pokemon(660,660,170,100,Glaciate,Blizzard,Stone_Edge,Draco_Meteor,disp_kyurem,None)#","ice","dragon",90,110,100,130,"pwdn","freeze",None,"pwup")
+    global xerneas#Pokemon(680,680,131,98,Geomancy,Moonblast,Close_Combat,Thunder,disp_xerneas,None)#","fairy",None,50,95,120,110,("restore"global andglobal "pwup"),global "pwdn","pwdn","para")
+    global zygarde#Pokemon(708,708,100,216,Lands_Wrath,Thousand_Arrows,Thousand_Waves,Core_Enforcer,disp_zygarde,mega_zygarde)#","ground","dragon",90,135,90,100,"pwdn","pwup","para","pwdn")
+    global zacian#Pokemon(720,720,170,148,Behemoth_Blade,Moonblast,Hyper_Beam,Steel_Beam,piczacian,mega_zacian)#","fairy","steel",100,95,150,140,"pwup","pwdn","pwup","pwup")
+    global miraidon#Pokemon(680,680,135,135,Electro_Drift,Overheat,Outrage,Solar_B
+    pprint("Ceiran:",350,50)
+    pprint("Welcome to the final battle of the Legend league.",350,50)
+    pprint("I am Ceiran, the founder of the league.",350,50)
+    pprint("You are going to use 2 Legendary Pokemon to beat Ayatsugi, the champion of the league.",150,50)
+    pprint("Ayatsugi:",350,50)
+    pprint("Please, what is your name?",350,50)
+    name_enter=Entry(window,width=30)
+    name_enter.pack()
+    global var
+    var.set(name_enter.get())
+    name=var.get()
+    name_enter.pack_forget()
+    pprint("Ayatsugi:",350,50)
+    pprint(f"Wow, that's a great name,{name}!",350,50)
+    pprint("Let us start the battle now.",350,50)
+    pprint("Please, choose 2 Pokemon.Use WASD on your",350,50) 
+    pprint("keyboard to select and press A to confirm.",350,50)
+    poke_1=Label(window,text="First Pokemon:")
+    poke_2=Label(window,text="Second Pokemon:")
+    poke_1.place(x=600,y=80)
+    poke_2.place(x=600,y=120)
+    listNaN=["       ","    ","    ","    ","    "]
+    list0=["       ","    ","    ","    ","    "]
+    list1=["       ","Mewtwo","Lugia","Entei","Raikou"]
+    list2=["       ","Suicune","Groudon","Kyogre","Rayquaza"]
+    list3=["       ","Deoxys","Palkia","Dialga","Giratina"]
+    list4=["       ","Darkrai","Cresselia","Zekrom","Reshiram"]
+    list5=["       ","Kyurem","Diancie","Zerneas","Zygarde"]
+    pokelist=[listNaN,list0,list1,list2,list3,list4,list5]
+    
+    for i in pokelist:
+        for j in range(0,5):
+            l=Label(window,text=i[j])
+            if i==listNaN:
+                row=0
+            elif i==list0:
+                row=1
+            elif i==list1:
+                row=2
+            elif i==list2:
+                row=3
+            elif i==list3:
+                row=4
+            elif i==list4:
+                row=5
+            elif i==list5:
+                row=6
+            l.grid(row=row,column=j,padx=5,pady=5)
+    arrow=Label(window,text="→")
+    arrow.place(x=25,y=35)
+
+    
+    while poke1==None:
+        event.pump()
+        ps = key.get_pressed()
+        if ps[K_w]:
+            if arrow.winfo_y()>35:
+                arrow.pack_forget()
+                arrow.place(x=arrow.winfo_x(),y=arrow.winfo_y()-25)
+        if ps[K_d]:
+            if arrow.winfo_x()<295:
+                arrow.pack_forget()
+                arrow.place(x=arrow.winfo_x()+90,y=arrow.winfo_y())
+        if ps[K_s]:
+            if arrow.winfo_y()<135:
+                arrow.pack_forget()
+                arrow.place(x=arrow.winfo_x(),y=arrow.winfo_y()+25)
+        if ps[K_a]:
+            if arrow.winfo_x()>25:
+                arrow.pack_forget()
+                arrow.place(x=arrow.winfo_x()-90,y=arrow.winfo_y())
+        if a_click==True:
+            row=((arrow.winfo_y()-35)//25)
+            column=((arrow.winfo_x()-25)//90)
+            if row==0:
+                poke1=list1[column+1]
+            elif row==1:
+                poke1=list2[column+1]
+            elif row==2:
+                poke1=list3[column+1]
+            elif row==3:
+                poke1=list4[column+1]
+            elif row==4:
+                poke1=list5[column+1]
+            config1=Label(window,text=poke1)
+            config1.place(x=poke1.winfo_x()+120,y=poke1.winfo_y())
+            arrow.pack_forget()
+            def clear_all():
+                for widget in window.winfo_children():
+                    widget.pack_forget()
+            clear_all()
+            poke_1=Label(window,text="First Pokemon:")
+            poke_2=Label(window,text="Second Pokemon:")
+            poke_1.place(x=600,y=80)
+            poke_2.place(x=600,y=120)
+            config1=Label(window,text=poke1)
+            config1.place(x=poke_1.winfo_x()+120,y=poke_1.winfo_y())
+            if poke1=="Mewtwo":
+                pokemon1=mewtwo
+            elif poke1=="Lugia":
+                pokemon1=lugia
+            elif poke1=="Entei":
+                pokemon1=entei
+            elif poke1=="Raikou":
+                pokemon1=raikou
+            elif poke1=="Suicune":
+                pokemon1=suicune
+            elif poke1=="Groudon":
+                pokemon1=groudon
+            elif poke1=="Kyogre":
+                pokemon1=kyogre
+            elif poke1=="Rayquaza":
+                pokemon1=rayquaza
+            elif poke1=="Deoxys":
+                pokemon1=deoxys
+            elif poke1=="Palkia":
+                pokemon1=palkia
+            elif poke1=="Dialga":
+                pokemon1=dialga
+            elif poke1=="Giratina":
+                pokemon1=giratina
+            elif poke1=="Darkrai":
+                pokemon1=darkrai
+            elif poke1=="Cresselia":
+                pokemon1=cresselia
+            elif poke1=="Zekrom":
+                pokemon1=zekrom
+            elif poke1=="Reshiram":
+                pokemon1=reshiram
+            elif poke1=="Kyurem":
+                pokemon1=kyurem
+            elif poke1=="Xerneas":
+                pokemon1=xerneas
+            elif poke1=="Zygarde":
+                pokemon1=zygarde
+            break
+    pprint("Choose your second Pokemon",350,300)
+ 
+    listNaN=["       ","    ","    ","    ","    "]
+    list0=["       ","    ","    ","    ","    "]
+    list1=["       ","Mewtwo","Lugia","Entei","Raikou"]
+    list2=["       ","Suicune","Groudon","Kyogre","Rayquaza"]
+    list3=["       ","Deoxys","Palkia","Dialga","Giratina"]
+    list4=["       ","Darkrai","Cresselia","Zekrom","Reshiram"]
+    list5=["       ","Kyurem","Diancie","Zerneas","Zygarde"]
+    pokelist=[listNaN,list0,list1,list2,list3,list4,list5]
+    
+    for i in pokelist:
+        for j in range(0,5):
+            l=Label(window,text=i[j])
+            if i==listNaN:
+                row=0
+            elif i==list0:
+                row=1
+            elif i==list1:
+                row=2
+            elif i==list2:
+                row=3
+            elif i==list3:
+                row=4
+            elif i==list4:
+                row=5
+            elif i==list5:
+                row=6
+            l.grid(row=row,column=j,padx=5,pady=5)
+    arrow=Label(window,text="→")
+    arrow.place(x=25,y=35)
+
+    
+    while poke2==None:
+          event.pump()
+          ps = key.get_pressed()
+          if ps[K_w]:
+              if arrow.winfo_y()>35:
+                  arrow.pack_forget()
+                  arrow.place(x=arrow.winfo_x(),y=arrow.winfo_y()-25)
+          if ps[K_d]:
+              if arrow.winfo_x()<295:
+                  arrow.pack_forget()
+                  arrow.place(x=arrow.winfo_x()+90,y=arrow.winfo_y())
+          if ps[K_s]:
+              if arrow.winfo_y()<135:
+                  arrow.pack_forget()
+                  arrow.place(x=arrow.winfo_x(),y=arrow.winfo_y()+25)
+          if ps[K_a]:
+              if arrow.winfo_x()>25:
+                  arrow.pack_forget()
+                  arrow.place(x=arrow.winfo_x()-90,y=arrow.winfo_y())
+          if a_click==True:
+              row=((arrow.winfo_y()-35)//25)
+              column=((arrow.winfo_x()-25)//90)
+              if row==0:
+                  poke2=list1[column+1]
+              elif row==1:
+                  poke2=list2[column+1]
+              elif row==2:
+                  poke2=list3[column+1]
+              elif row==3:
+                  poke2=list4[column+1]
+              elif row==4:
+                  poke2=list5[column+1]
+              config1=Label(window,text=poke1)
+              config1.place(x=poke1.winfo_x()+120,y=poke1.winfo_y())
+              arrow.pack_forget()
+              def clear_all():
+                  for widget in window.winfo_children():
+                      widget.pack_forget()
+              clear_all()
+              poke_1=Label(window,text="First Pokemon:")
+              poke_2=Label(window,text="Second Pokemon:")
+              poke_1.place(x=600,y=80)
+              poke_2.place(x=600,y=120)
+              config1=Label(window,text=poke1)
+              config1.place(x=poke_1.winfo_x()+120,y=poke_1.winfo_y())
+              config2=Label(window,text=poke2)
+              config2.place(x=poke_2.winfo_x()+120,y=poke_2.winfo_y())
+              if poke2=="Mewtwo":
+                  pokemon2=mewtwo
+              elif poke2=="Lugia":
+                  pokemon2=lugia
+              elif poke2=="Entei":
+                  pokemon2=entei
+              elif poke2=="Raikou":
+                  pokemon2=raikou
+              elif poke2=="Suicune":
+                  pokemon2=suicune
+              elif poke2=="Groudon":
+                  pokemon2=groudon
+              elif poke2=="Kyogre":
+                  pokemon2=kyogre
+              elif poke2=="Rayquaza":
+                  pokemon2=rayquaza
+              elif poke2=="Deoxys":
+                  pokemon2=deoxys
+              elif poke2=="Palkia":
+                  pokemon2=palkia
+              elif poke2=="Dialga":
+                  pokemon2=dialga
+              elif poke2=="Giratina":
+                  pokemon2=giratina
+              elif poke2=="Darkrai":
+                  pokemon2=darkrai
+              elif poke2=="Cresselia":
+                  pokemon2=cresselia
+              elif poke2=="Zekrom":
+                  pokemon2=zekrom
+              elif poke2=="Reshiram":
+                  pokemon2=reshiram
+              elif poke2=="Kyurem":
+                  pokemon2=kyurem
+              elif poke2=="Xerneas":
+                  pokemon2=xerneas
+              elif poke2=="Zygarde":
+                  pokemon2=zygarde
+              break
+          
+            
+"""loading the pictures used in game"""          
+            
+          
+def load_pics():
+    global disp_cresselia,disp_darkrai,disp_deoxys,disp_dialga,disp_entei,disp_giratina
+    global disp_mewtwo,disp_groudon,disp_kyogre,disp_kyurem,disp_lugia,disp_raikou,disp_suicune
+    global disp_palkia,disp_rayquaza,disp_zekrom,disp_zygarde,disp_xerneas,mega_mewtwo,mega_rayquaza,mega_reshiram
+    global mega_zacian,mega_zekrom,mega_zygarde,picmiraidon,piczacian
+    img_mewtwo=PhotoImage(file="mewtwo.png")
+    disp_mewtwo=Label(window,image=img_mewtwo)    
+    img_entei=PhotoImage(file="entei.png")
+    disp_entei=Label(window,image=img_entei)
+    img_suicune=PhotoImage(file="suicune.png")
+    disp_suicune=Label(window,image=img_suicune)
+    img_raikou=PhotoImage(file="raikou.png")
+    disp_raikou=Label(window,image=img_raikou)
+    img_groudon=PhotoImage(file="groudon.png")
+    disp_groudon=Label(window,image=img_groudon)
+    img_kyogre=PhotoImage(file="kyogre.png")
+    disp_kyogre=Label(window,image=img_kyogre)
+    img_rayquaza=PhotoImage(file="rayquaza.png")
+    disp_rayquaza=Label(window,image=img_rayquaza)
+    img_deoxys=PhotoImage(file="deoxys.png")
+    disp_deoxys=Label(window,image=img_deoxys)
+    img_palkia=PhotoImage(file="palkia.png")
+    disp_palkia=Label(window,image=img_palkia)
+    img_dialga=PhotoImage(file="dialga.png")
+    disp_dialga=Label(window,image=img_dialga)
+    img_giratina=PhotoImage(file="giratina.png")
+    disp_giratina=Label(window,image=img_giratina)
+    img_darkrai=PhotoImage(file="darkrai.png")
+    disp_darkrai=Label(window,image=img_darkrai)
+    img_cresselia=PhotoImage(file="cresselia.png")
+    disp_cresselia=Label(window,image=img_cresselia)
+    img_zekrom=PhotoImage(file="zekrom.png")
+    disp_zekrom=Label(window,image=img_zekrom)
+    img_reshiram=PhotoImage(file="reshiram.png")
+    disp_reshiram=Label(window,image=img_reshiram)
+    img_kyurem=PhotoImage(file="kyurem.png")
+    disp_kyurem=Label(window,image=img_kyurem)
+    img_xerneas=PhotoImage(file="xerneas.png")
+    disp_xerneas=Label(window,image=img_xerneas)
+    img_zygarde=PhotoImage(file="zygarde.png")
+    disp_zygarde=Label(window,image=img_zygarde)
+    img_lugia=PhotoImage(file="lugia.png")
+    disp_lugia=Label(window,image=img_lugia)
+    megamewtwo=PhotoImage(file="mega mewtwo.png")
+    mega_mewtwo=Label(window,image=megamewtwo)
+    megaray=PhotoImage(file="mega rayquaza.png")
+    mega_rayquaza=Label(window,image=megaray)
+    mega_zekrom=Label(window,image=PhotoImage(file="mega zekrom.png"))
+    mega_reshiram=Label(window,image=PhotoImage(file="mega reshiram.png"))
+    mega_zygarde=Label(window,image=PhotoImage(file="zygarde complete.png"))
+    piczacian=Label(window,image=PhotoImage(file="zacian.png"))
+    mega_zacian=Label(window,image=PhotoImage(file="zacian crowned.png"))
+    picmiraidon=Label(window,image=PhotoImage(file="miraidon.png"))
+    
+    
+"""loading the battle background; will be added by ver1.2"""    
+    
+    
+def load_bg():
+    pass
+
+
+"""defining a move"""
+
+
+class Move:
+    def __init__(self,name,pw,buff):
+        self.name=name
+        self.pw=pw
+        self.buff=buff
+ 
+"""defining a Pokemon"""       
+ 
+    
+ 
+class Pokemon:
+    
+    
+    """logging stats"""
+    
+    
+    
+    def __init__(self,maxhp,hp,atk,defense,mv1,mv2,mv3,mv4,pic,megapic):
+        self.maxhp=maxhp
+        self.hp=hp
+        self.atk=atk
+        self.defense=defense
+        self.poison1=False
+        self.burn1=False
+        self.freeze1=False
+        self.sleep1=False
+        self.para1=False
+        self.perish1=None
+        self.deepsleep=False   
+        self.mv1=mv1
+        self.mv2=mv2
+        self.mv3=mv3
+        self.mv4=mv4
+        self.pic=pic
+        self.megapic=megapic
+    
+    
+    """defining an attack when the Pokemon belongs to the user"""
+    
+    
+    def attack(self,opp,name,oppname):
+        
+        
+        """checking if any statuses are not letting the Pokemon use moves"""
+        
+        
+        if self.freeze1==False and self.sleep1==False and self.deepsleep==False:
+            if self.para1==False or (self.para1==True and randint(1,2)==1):
+                
+                
+                """choose a move using WASD"""
+                
+                
+                l1=Label(window,text=self.mv1.name)
+                l1.place(x=260,y=230)
+                l2=Label(window,text=self.mv2.name)   
+                l2.place(x=360,y=230)
+                l3=Label(window,text=self.mv3.name)
+                l3.place(x=260,y=270)
+                l4=Label(window,text=self.mv4.name)
+                l4.place(x=360,y=270)
+                arrow=Label(window,text="→")
+                arrow.place(x=250,y=230)
+                valmv=0
+                while valmv==0:
+                    event.pump()
+                    ps = key.get_pressed()
+                    if ps[K_w]:
+                        if arrow.winfo_y()>230:
+                            arrow.pack_forget()
+                            arrow.place(x=arrow.winfo_x(),y=arrow.winfo_y()-40)
+                    if ps[K_d]:
+                        if arrow.winfo_x()<360:
+                            arrow.pack_forget()
+                            arrow.place(x=arrow.winfo_x()+110,y=arrow.winfo_y())
+                    if ps[K_s]:
+                        if arrow.winfo_y()<270:
+                            arrow.pack_forget()
+                            arrow.place(x=arrow.winfo_x(),y=arrow.winfo_y()+40)
+                    if ps[K_a]:
+                        if arrow.winfo_x()>260:
+                            arrow.pack_forget()
+                            arrow.place(x=arrow.winfo_x()-110,y=arrow.winfo_y())
+                    if a_click==True:
+                        if arrow.winfo_x()==250:
+                            if arrow.winfo_y==230:
+                                move=self.mv1
+                            else:
+                                move=self.mv2
+                        else:
+                            if arrow.winfo_y()==230:
+                                move=self.mv3
+                            else:
+                                move=self.mv4
+                        valmv=1
+                        break
+                    
+                    
+                """calculate the damage and effects caused by the move"""
+                
+                
+                global damage
+                damage=move.pw*self.atk
+                pprint("f{name} used {move.name}!")
+                if randint(1,1000) in range(600,750):
+                    damage*=1.5
+                    pprint("Critical hit! Damage increased this round",250,250)
+                if move.buff=="poison":
+                    opp.poison(opp)
+                    pprint(f"{oppname} poisoned",250,250)
+                if move.buff=="flame":
+                    opp.burn(opp)
+                    pprint(f"{oppname} burnt",250,250)
+                if move.buff=="freeze":
+                    opp.freeze(opp)
+                    pprint(f"{oppname} freezed",250,250)
+                if move.buff=="sleep":
+                    opp.sleep(opp)
+                    pprint(f"{oppname} fell into sleep",250,250)
+                if move.buff=="para":
+                    opp.para("opp")
+                    pprint(f"{oppname} paralysed",250,250)
+                if move.buff=="pwup":
+                    self.mv1.pw+=20
+                    self.mv2.pw+=20
+                    self.mv3.pw+=20
+                    self.mv4.pw+=20
+                    self.atk+=20
+                    self.defense+=20
+                    pprint("Stats increased.", 250, 250)
+                if move.buff=="deep sleep":
+                    pprint(f"{oppname} has gone into a sleep so deep, it is never waking up",250,250)
+                    opp.deep_sleep()
+                    move.pw=0
+                    move.buff=None
+                    move.name="empty move"
+                
+                if move.buff=="pwdn":
+                    opp.atk-=20
+                    opp.defense-=20
+                    pprint("f{oppname} stats decreased",250,250)
+                if move.buff=="restore":
+                    self.hp+=(self.maxhp-self.hp)/2
+                    pprint(f"Hp fully restored. {self.hp}HP left",250,250)
+                if move.buff=="complete restore":
+                    self.hp+=(self.maxhp-self.hp)/1.5
+                    self.poison1=False
+                    self.burn1=False
+                    self.freeze1=False
+                    self.sleep1=False
+                    self.para1=False
+                    self.perish1=None
+                    self.deepsleep=False   
+                    pprint("All statuses cleared, including perish.",250,250)
+                    pprint(f"HP restored. {self.hp}HP left",250,250)
+                    move.pw=0
+                    move.buff=None
+                    move.name="empty move"
+                if move.buff=="perish":
+                    self.perish(self,opp)
+                    pprint("Perish activated",250,250)
+                if move.buff=="mega":
+                    self.maxhp+=100
+                    self.hp+=100
+                    self.atk+=30
+                    self.defense+=30
+                    self.pic=self.megapic
+                    move.buff=None
+                    pprint("Successfully activated transform requirements! Stats increased",250,250)
+                    pprint("Form will change next round",250,250)
+                    
+                    
+                """inform the user if the Pokemon cannot use moves"""
+                    
+                    
+            else:
+                pprint("{name} is currently paralysed and cannot move.",250,250)
+        else:
+            pprint(f"{name} is currently sleeping or has freezed and cannot use moves.")
+            
+            
+            
+    """defining the procedure of losing HP when getting attacked or in poison/burnt state"""        
+       
+     
+    def defend(self,opp,name):
+        global damage
+        damage=damage//self.defense
+        self.hp-=damage
+        pprint(f"{name} took {damage} damage. {self.hp}HP left.",250,250)
+        if self.burn1==True:
+            self.hp-=self.maxhp//7
+            pprint(f"{name} took {self.maxhp//7} damage from burn. {self.hp}HP left.", 250, 250)
+        if self.poison1==True:
+            self.hp-=self.maxhp//8
+            pprint(f"{name} took {self.maxhp//8} damage from burn. {self.hp}HP left.", 250, 250)
+     
+        
+    """defining an attack when the Pokemon belongs to an NPC"""
+        
+     
+    def oppatk(self,opp,name,oppname):
+        
+        
+        """checking if any statuses are not letting the Pokemon use moves"""
+        
+        
+        if self.freeze1==False and self.sleep1==False and self.deepsleep==False:
+            if self.para1==False or (self.para1==True and randint(1,2)==1):
+                
+                
+                """choosing a random move"""
+                
+                
+                move=choice([self.mv1,self.mv2,self.mv3,self.mv4])
+                
+                
+                """calculating damage and effects"""
+                
+                
+                pprint(f"Ayatsugi's {name} used {move.name}!")
+                global damage
+                damage=move.pw*self.atk
+                if randint(1,1000) in range(600,750):
+                    damage*=1.5
+                    pprint("Critical hit! Damage increased this round",250,250)
+                if move.buff=="poison":
+                    opp.poison(opp)
+                    pprint(f"{oppname} has been poisoned",250,250)
+                if move.buff=="flame":
+                    opp.burn(opp)
+                    pprint(f"{oppname} has been burnt",250,250)
+                if move.buff=="freeze":
+                    opp.freeze(opp)
+                    pprint(f"{oppname} has freezed",250,250)
+                if move.buff=="sleep":
+                    opp.sleep(opp)
+                    pprint(f"{oppname} fell into sleep",250,250)
+                if move.buff=="para":
+                    opp.para("opp")
+                    pprint(f"{oppname} has been paralysed",250,250)
+                if move.buff=="pwup":
+                    self.mv1.pw+=20
+                    self.mv2.pw+=20
+                    self.mv3.pw+=20
+                    self.mv4.pw+=20
+                    self.atk+=20
+                    self.defense+=20
+                    pprint("Stats increased.", 250, 250)
+                if move.buff=="deep sleep":
+                    pprint(f"{oppname} has gone into a sleep so deep, it is never waking up",250,250)
+                    opp.deep_sleep()
+                    move.pw=0
+                    move.buff=None
+                    move.name="empty move"
+                
+                if move.buff=="pwdn":
+                    opp.atk-=20
+                    opp.defense-=20
+                    pprint("f{oppname} stats decreased",250,250)
+                if move.buff=="restore":
+                    self.hp+=(self.maxhp-self.hp)/2
+                    pprint(f"Hp fully restored. {self.hp}HP left",250,250)
+                if move.buff=="complete restore":
+                    self.hp+=(self.maxhp-self.hp)/1.5
+                    self.poison1=False
+                    self.burn1=False
+                    self.freeze1=False
+                    self.sleep1=False
+                    self.para1=False
+                    self.perish1=None
+                    self.deepsleep=False   
+                    pprint("All statuses cleared, including perish.",250,250)
+                    pprint(f"HP restored. {self.hp}HP left",250,250)
+                    move.pw=0
+                    move.buff=None
+                    move.name="empty move"
+                if move.buff=="perish":
+                    self.perish(self,opp)
+                    pprint("Perish activated",250,250)
+                if move.buff=="mega":
+                    self.maxhp+=100
+                    self.hp+=100
+                    self.atk+=30
+                    self.defense+=30
+                    self.pic=self.megapic
+                    pprint("Successfully activated transform requirements! Stats increased",250,250)
+                    pprint("Form will change next round",250,250)
+                    move.buff=None
+                    
+                    
+                    """infroming the user when the opponent's Pokemon cannot use moves"""
+                    
+            else:
+                pprint("{name} is currently paralysed and cannot move.",250,250)
+        else:
+            pprint(f"{name} is currently sleeping or has freezed and cannot use moves.")
+    
+    
+    """transferring status-giving acts into bool stats stored within the opposing Pokemon so that the system can check at each round"""
+    
+    
+    def poison(self):
+        self.poison1=True
+    def sleep(self):
+        self.sleep1=True
+    def burn(self):
+        self.burn1=True
+    def para(self):
+        self.para1=True
+    def freeze(self):
+        self.freeze1=True
+    def perish(self,opp):
+        self.perish1=3
+        opp.perish=3
+        
+        
+"""defining the battle procedure for 1v1 battles """        
+        
+        
+def battle(a,b,aname,bname):
+    global stat
+    Label(window,text=f"{aname}:      /{a.maxhp}HP").place(100,200)
+    Label(window,text=f"{bname}:      /{b.maxhp}HP").place(500,200)
+    fa=Label(window,text=f"{a.hp}")
+    fb=Label(window,text=f"{b.hp}")
+    fa.place(190,200)
+    fb.place(590,200)
+    fa.pack_forget()
+    fb.pack_forget()
+    fa.place(190,200)
+    fb.place(590,200)
+    a.pic.place(200,400)
+    b.pic.place(400.200)
+    while a.hp>0 and b.hp>0:
+        a.pic.pack_forget()
+        b.pic.pack_forget()
+        a.pic.place(200,400)
+        b.pic.place(400.200)
+        fa.pack_forget()
+        fb.pack_forget()
+        fa.place(190,200)
+        fb.place(590,200)
+        a.attack(a,b,aname,bname)
+        b.defend(b,a,bname)
+        b.oppatk(b,a,bname,aname)  
+        a.defend(a,b,aname)   
+        a.pic.pack_forget()
+        b.pic.pack_forget()
+        a.pic.place(200,400)
+        b.pic.place(400.200)
+        fa.pack_forget()
+        fb.pack_forget()
+        fa.place(190,200)
+        fb.place(590,200)
+        a.attack(a,b,aname,bname)
+        b.defend(b,a,bname)
+        b.oppatk(b,a,bname,aname)  
+        a.defend(a,b,aname) 
+        a.pic.pack_forget()
+        b.pic.pack_forget()
+        a.pic.place(200,400)
+        b.pic.place(400.200)
+        fa.pack_forget()
+        fb.pack_forget()
+        fa.place(190,200)
+        fb.place(590,200)
+        a.attack(a,b,aname,bname)
+        b.defend(b,a,bname)
+        b.oppatk(b,a,bname,aname)  
+        a.defend(a,b,aname) 
+        a.poison1=False
+        a.burn1=False
+        a.freeze1=False
+        a.sleep1=False
+        a.para1=False
+        a.perish1=None
+        a.deepsleep=False   
+        b.poison1=False
+        b.burn1=False
+        b.freeze1=False
+        b.sleep1=False
+        b.para1=False
+        b.perish1=None
+        b.deepsleep=False 
+        pprint("All statuses cleared, including perish.",250,250)
+    if not(a.hp==0 and b.hp==0):
+        if a.hp==0:
+            pprint(f"{aname} has fainted",250,250)
+            stat=0
+        else:
+            pprint(f"{bname} has fainted",250,250)
+            stat=1
+    else:
+        pprint("Both Pokemon have fainted",250,250)
+        stat=2
+        
+"""defining the battle procedure for 2v2 battles"""        
+
+
+def pokemon_battle(a1,a2,b1,b2,na1,na2,nb1,nb2):
+    pprint(f"Go! {na1}!",250,250)
+    pprint("Champion Ayatsugi sent out Miraidon!",250,250)
+    battle(a1,b1,na1,nb1)
+    
+    if stat==0:
+        pprint("Champion Ayatsugi sent out Zacian!",250,250)
+        battle(a1,b2,na1,nb2)
+
+        if stat==0:
+            win()
+        elif stat==1:
+            pprint(f"Go! {na2}!",250,250)
+            battle(a2,b2,na2,nb2)
+ 
+            if stat==0:
+                win()
+            else:
+                lose()
+        else:
+            win()
+        
+    elif stat==1:
+        pprint(f"Go! {na2}!",250,250)
+        battle(a2,b1,na2,nb1)
+  
+        if stat==0:
+            pprint("Champion Ayatsugi sent out Zacian!",250,250)
+            battle(a2,b2,na2,nb2)
+ 
+            if stat==0:
+                win()
+            else:
+                lose()
+        else:
+            lose()
+    else:
+        pprint(f"Go! {na2}!",250,250)
+        pprint("Champion Ayatsugi sent out Zacian!",250,250)
+        battle(a2,b2,na2,nb2)
+
+        
+        if stat==0:
+            win()
+        else:
+            lose()
+            
+"""dialogue when you win or lose"""            
+            
+            
+            
+def win():
+    global name
+    pprint("Ceiran:",250,250)
+
+    pprint("Congrajulations!",250,250)
+
+    pprint("You are the new champion now.",250,250)
+
+    pprint("I have seen too many of these recursions.",250,250)
+
+    pprint(f"{name}, the same person...",250,250)
+
+    pprint("Becoming champion again and again.",250,250)
+
+    pprint("Maybe it's just a trick of the light... I will never know.",250,250)
+
+    pprint("Good luck then!",250,250)
+
+    pprint(f"Hope we can meet again someday. I will always be waiting for you in the stadium, {name}.",250,250)
+
+    pprint("Ayatsugi:",250,250)
+
+    pprint(f"Good job,{name}! Looks like you have beat all of my Pokemon.",250,250)
+
+    pprint("You see, I know this isnt over.",250,250)
+
+    pprint("As a champion who lived more than 300 years, I can see the flow of timelines.",250,250)
+
+    pprint("We are just living in a reality made by sheer commands typed into the computer.",250,250)
+
+    pprint("And the reality changes all the time. My lore, my personalities, my Pokemon...... ",250,250)
+
+    pprint("They will all change someday.",250,250)
+
+    pprint("And the worst part is, I wont even know it.",250,250)
+
+    pprint("By that day, we will meet, and fight again.",250,250)
+
+    pprint("I am trapped in a constantly changing flow of text.",250,250)
+
+    pprint("Even though I see it, I cant do anything to it.",250,250)
+
+    pprint("All i can do is maintain the stability of this world by to keep on fighting.",250,250)
+
+    pprint(f"But you, {name}...",250,250)
+
+    pprint("You are different.",250,250)
+
+    pprint("Your will to change the course of this world...",250,250)
+
+    pprint("I think I know the reason of a child possibly having that much power now.",250,250)
+
+    pprint("There is someone controlling you do do all of this, isnt it?",250,250)
+
+    pprint("Hey, you out there... If you really exist, be sure to come back.",250,250)
+
+    pprint(f"See you on the next update, {name}! I am looking forward to it.",250,250)
+
+    pprint("YOU BEAT THE GAME!",250,250)
+def lose():
+    pprint("Ceiran:",250,250)
+
+
+    pprint("What a pity.",250,250)
+    pprint("You tried to choose the best Pokemon, but still lost.",250,250)
+    pprint("Well, good luck next time then! See you!",250,250)
+
+
+    pprint("GAME OVER",250,250)
+    pprint("Be sure to win next try!",250,250)
+
+
+
+"""logging Pokemon's stats"""
+
+
+def log_stats():
+    global Psycho_Cut#Move("Psychoglobal Cut",global 100,None)
+    global Psycho_Blast#Move("Psychoglobal blast",120,"mega")
+    global Original_Power#Move("Originalglobal Power",70,None)
+    global Life_Dew#Move("Lifeglobal Dew",0,"restore")
+    global Aeroblast#Move("Aeroblast",100,"pwdn")
+    global Dragon_Rush#Move("Dragonglobal Rush",110,"para")
+    global Hydro_Pump#Move("Hydroglobal Pump",100,None)
+    global Sky_Attack#Move("Skyglobal Attack",140,"para")
+    global Eruption#Move("Eruption",150,"burn")
+    global Sacred_Fire#Move("Sacredglobal Fire",120,"burn")
+    global Extrasensory#Move("Extrasensory",80,"para")
+    global Scorching_sands#Move("Scorchongglobal Sands",90,"burn")
+    global Zap_Cannon#Move("Zapglobal Cannon",100,"para")
+    global Aura_Sphere#Move("Auraglobal sphere",100,None)
+    global Supercell_Slam#Move("Supercellglobal Slam",100,"para")
+    global Blizzard#Move("Blizzard",110,"freeze")
+    global Sheer_cold#Move("Sheerglobal Cold",400*random(),"freeze")
+    global Surf#Move("Surf",90,"pwup")
+    global Precipice_Blades#Move("Precipiceglobal Blades",120,"mega")
+    global Solar_Beam#Move("Solarglobal Beam",120,"burn")
+    global Hammer_Arm#Move("Hammerglobal Arm",100,"pwdn")
+    global Muddy_water#Move("Muddyglobal Water",90,"poison")
+    global Origin_Pulse#Move("Originglobal Pulse",110,"mega")
+    global Water_Spout#Move("Waterglobal Spout",150,None)
+    global Ice_Beam#Move("Iceglobal Beam",90,"freeze")
+    global Dragon_Acsent#Move("Dragonglobal Acsent",130,"mega")
+    global Draco_Meteor#Move("Dracoglobal Meteor",130,"pwup")
+    global Storm#Move("Storm",110,"para")
+    global Hyper_Beam#Move("Hyperglobal Beam",150,None)
+    global Psycho_Boost#Move("Psychoglobal Boost",140,"pwdn")
+    global Meteor_Beam#Move("Meteorglobal Beam",120,"pwup")
+    global Focus_Blast#Move("Focusglobal Blast",120,"pwdn")
+    global Earth_Power#Move("Earthglobal Power",90,"pwup")
+    global Spacial_Rend#Move("Spacialglobal Rend",150,"pwdn")
+    global Roar_Of_Time#Move("Roarglobal ofglobal Time",150,"para")
+    global Iron_Tail#Move("Ironglobal Tail",100,"para")
+    global Flash_Cannon#Move("Flashglobal Cannon",110,"para")
+    global Shadow_Force#Move("Shadowglobal Force",120,"pwdn")
+    global Stone_Edge#Move("Stoneglobal Edge",100,None)
+    global Poltergeist#Move("Poltergeist",110,"restore")
+    global Dream_Eater#Move("Dreamglobal Eater",100,"sleep")
+    global Dark_void#Move("Darkglobal Void",80,"deepglobal sleep")
+    global Thunder#Move("Thunder",110,"para")
+    global Sludge_Bomb#Move("Sludgeglobal Bomb",120,"poison")
+    global Moonblast#Move("Moonblast",global 95,"pwdn")
+    global Future_Sight#Move("Futureglobal Sight",120,None)
+    global Lunar_Blessing#Move("Lunarglobal Blessing",1,"completeglobal restore")
+    global Lunar_Dance#Move("Lunarglobal Dance",1,"restore")
+    global Bolt_Strike#Move("Boltglobal Strike",130,"mega")
+    global Fusion_Bolt#Move("Fusionglobal Bolt",110,"para")
+    global Scale_Shot#Move("Scaleglobal Shot",90,"pwup")
+    global Blue_Flare#Move("Blueglobal Flare",130,"mega")
+    global Fusion_Flame#Move("Fusionglobal Flame",110,"burn")
+    global Overheat#Move("Overheat",130,"burn")
+    global Glaciate#Move("Glaciate",80,"freeze")
+    global Geomancy#Move("Geomancy",1,"restore")
+    global Close_Combat#Move("Closeglobal Combat",global 120,"pwup")
+    global Lands_Wrath#Move("Land'sglobal Wrath",100,"pwup")
+    global Thousand_Arrows#Move("Thousandglobal Arrows",110,"pwup")
+    global Thousand_Waves#Move("Thousandglobal Waves",110,"pwdn")
+    global Core_Enforcer#Move("Coreglobal Enforcer",130,"mega")
+    global Behemoth_Blade#Move("Behemothglobal Blade",120,"mega")
+    global Steel_Beam#Move("Steelglobal Beam",140,"pwdn")
+    global Electro_Drift#Move("Electroglobal Drift",100,"para")
+    global Outrage#Move("Outrage",160,None)
+    global Solar_Blade#Move("Solarglobal Blade",120,"burn")
+    global mewtwo#Pokemon(680,global 680,global 154,global 90,global Psycho_Cut,Psycho_Blast,Original_Power,Life_Dew,disp_mewtwo,mega_mewtwo)#global 90,global 100,global 60,global 0,global None,global None,global "pwup",global "restore")
+    global lugia#Pokemon(680,680,90,154,Aeroblast,Dragon_Rush,Hydro_Pump,Sky_Attack,disp_lugia,None)#"psychic","flying",100,100,110,140,None,"para",None,"para")
+    global entei#Pokemon(580,580,115,85,Eruption,Sacred_Fire,Extrasensory,Scorching_sands,disp_entei,None)
+    global raikou#Pokemon(580,580,85,100,Zap_Cannon,Aura_Sphere,Supercell_Slam,Extrasensory,disp_raikou,None)
+    global suicune#Pokemon(580,580,90,115,Blizzard,Sheer_cold,Surf,Extrasensory,disp_suicune,None)#")#"water",None,110,400*random(),90,80,"freeze","freeze",None,None
+    global groudon#Pokemon(670,670,150,140,Precipice_Blades,Eruption,Solar_Beam,Hammer_Arm,disp_groudon,None)
+    global kyogre#Pokemon(670,670,150,140,Muddy_water,Origin_Pulse,Water_Spout,Ice_Beam,disp_kyogre,None)#","water",None,90,110,150,90,None,None,None,"freeze")
+    global rayquaza#Pokemon(680,680,150,90,Dragon_Acsent,Draco_Meteor,Storm,Hyper_Beam,disp_rayquaza,mega_rayquaza)#"dragon","flying",120,130,110,150,None,"pwup","para",None)
+    global deoxys#Pokemon(600,600,180,160,Psycho_Boost,Hyper_Beam,Meteor_Beam,Focus_Blast,disp_deoxys,None)#","psychic",None,140,150,120,120,"pwdn",None,"pwup","pwdn")
+    global palkia#Pokemon(680,680,150,120,Earth_Power,Spacial_Rend,Hydro_Pump,Ice_Beam,disp_palkia,None)#","water","dragon",90,150,110,90,"pwdn","pwdn",None,"freeze")
+    global dialga#Pokemon(680,global 680,global 150,global 120,Roar_Of_Time,Iron_Tail,Flash_Cannon,Blizzard,disp_dialga,None)#","steel","dragon",150,100,80,110,None,"pwdn","pwdn","freeze")
+    global giratina#Pokemon(680,680,120,120,Shadow_Force,Aura_Sphere,Stone_Edge,Poltergeist,disp_giratina,None)#","ghost","dragon",120,80,100,110,"pwdn",None,"pwup","para")
+    global darkrai#Pokemon(600,600,135,90,Dream_Eater,Dark_void,Thunder,Sludge_Bomb,disp_darkrai,None)#","dark",None,100,0,110,90,"sleep","deepglobal sleep","para","poison")
+    global cresselia#Pokemon(600,600,75,130,Moonblast,Future_Sight,Lunar_Blessing,Lunar_Dance,disp_cresselia,None)#","psychic",None,95,120,0,0,"pwdn",None,"completeglobal restore","restore")
+    global zekrom#Pokemon(680,680,150,120,Bolt_Strike,Fusion_Bolt,Draco_Meteor,Scale_Shot,disp_zekrom,mega_zekrom)#","electric","dragon",130,100,130,45*randint(1,5),"para","para","pwup",None)
+    global reshiram#Pokemon(680,global 680,150,120,Blue_Flare,Fusion_Flame,Draco_Meteor,Overheat,disp_reshiram,mega_reshiram)#","fire","dragon",130,100,130,130,"flame","flame","pwup","pwdn")
+    global kyurem#Pokemon(660,660,170,100,Glaciate,Blizzard,Stone_Edge,Draco_Meteor,disp_kyurem,None)#","ice","dragon",90,110,100,130,"pwdn","freeze",None,"pwup")
+    global xerneas#Pokemon(680,680,131,98,Geomancy,Moonblast,Close_Combat,Thunder,disp_xerneas,None)#","fairy",None,50,95,120,110,("restore"global andglobal "pwup"),global "pwdn","pwdn","para")
+    global zygarde#Pokemon(708,708,100,216,Lands_Wrath,Thousand_Arrows,Thousand_Waves,Core_Enforcer,disp_zygarde,mega_zygarde)#","ground","dragon",90,135,90,100,"pwdn","pwup","para","pwdn")
+    global zacian#Pokemon(720,720,170,148,Behemoth_Blade,Moonblast,Hyper_Beam,Steel_Beam,piczacian,mega_zacian)#","fairy","steel",100,95,150,140,"pwup","pwdn","pwup","pwup")
+    global miraidon#Pokemon(680,680,135,135,Electro_Drift,Overheat,Outrage,Solar_Blade,picmiraidon,None)#","electric","dragon",100,130,120,120,("pwup"global andglobal "para"),("pwdn"global andglobal "flame"),("para"global andglobal "pwup"),("pwup"global andglobal "pwdn"))
+    Psycho_Cut=Move("Psycho Cut", 100,None)
+    Psycho_Blast=Move("Psycho blast",120,"mega")
+    Original_Power=Move("Original Power",70,None)
+    Life_Dew=Move("Life Dew",0,"restore")
+    Aeroblast=Move("Aeroblast",100,"pwdn")
+    Dragon_Rush=Move("Dragon Rush",110,"para")
+    Hydro_Pump=Move("Hydro Pump",100,None)
+    Sky_Attack=Move("Sky Attack",140,"para")
+    Eruption=Move("Eruption",150,"burn")
+    Sacred_Fire=Move("Sacred Fire",120,"burn")
+    Extrasensory=Move("Extrasensory",80,"para")
+    Scorching_sands=Move("Scorchong Sands",90,"burn")
+    Zap_Cannon=Move("Zap Cannon",100,"para")
+    Aura_Sphere=Move("Aura sphere",100,None)
+    Supercell_Slam=Move("Supercell Slam",100,"para")
+    Blizzard=Move("Blizzard",110,"freeze")
+    Sheer_cold=Move("Sheer Cold",400*random(),"freeze")
+    Surf=Move("Surf",90,"pwup")
+    Precipice_Blades=Move("Precipice Blades",120,"mega")
+    Solar_Beam=Move("Solar Beam",120,"burn")
+    Hammer_Arm=Move("Hammer Arm",100,"pwdn")
+    Muddy_water=Move("Muddy Water",90,"poison")
+    Origin_Pulse=Move("Origin Pulse",110,"mega")
+    Water_Spout=Move("Water Spout",150,None)
+    Ice_Beam=Move("Ice Beam",90,"freeze")
+    Dragon_Acsent=Move("Dragon Acsent",130,"mega")
+    Draco_Meteor=Move("Draco Meteor",130,"pwup")
+    Storm=Move("Storm",110,"para")
+    Hyper_Beam=Move("Hyper Beam",150,None)
+    Psycho_Boost=Move("Psycho Boost",140,"pwdn")
+    Meteor_Beam=Move("Meteor Beam",120,"pwup")
+    Focus_Blast=Move("Focus Blast",120,"pwdn")
+    Earth_Power=Move("Earth Power",90,"pwup")
+    Spacial_Rend=Move("Spacial Rend",150,"pwdn")
+    Roar_Of_Time=Move("Roar of Time",150,"para")
+    Iron_Tail=Move("Iron Tail",100,"para")
+    Flash_Cannon=Move("Flash Cannon",110,"para")
+    Shadow_Force=Move("Shadow Force",120,"pwdn")
+    Stone_Edge=Move("Stone Edge",100,None)
+    Poltergeist=Move("Poltergeist",110,"restore")
+    Dream_Eater=Move("Dream Eater",100,"sleep")
+    Dark_void=Move("Dark Void",80,"deep sleep")
+    Thunder=Move("Thunder",110,"para")
+    Sludge_Bomb=Move("Sludge Bomb",120,"poison")
+    Moonblast=Move("Moonblast", 95,"pwdn")
+    Future_Sight=Move("Future Sight",120,None)
+    Lunar_Blessing=Move("Lunar Blessing",1,"complete restore")
+    Lunar_Dance=Move("Lunar Dance",1,"restore")
+    Bolt_Strike=Move("Bolt Strike",130,"mega")
+    Fusion_Bolt=Move("Fusion Bolt",110,"para")
+    Scale_Shot=Move("Scale Shot",90,"pwup")
+    Blue_Flare=Move("Blue Flare",130,"mega")
+    Fusion_Flame=Move("Fusion Flame",110,"burn")
+    Overheat=Move("Overheat",130,"burn")
+    Glaciate=Move("Glaciate",80,"freeze")
+    Geomancy=Move("Geomancy",1,"restore")
+    Close_Combat=Move("Close Combat", 120,"pwup")
+    Lands_Wrath=Move("Land's Wrath",100,"pwup")
+    Thousand_Arrows=Move("Thousand Arrows",110,"pwup")
+    Thousand_Waves=Move("Thousand Waves",110,"pwdn")
+    Core_Enforcer=Move("Core Enforcer",130,"mega")
+    Behemoth_Blade=Move("Behemoth Blade",120,"mega")
+    Steel_Beam=Move("Steel Beam",140,"pwdn")
+    Electro_Drift=Move("Electro Drift",100,"para")
+    Outrage=Move("Outrage",160,None)
+    Solar_Blade=Move("Solar Blade",120,"burn")
+    
+    mewtwo=Pokemon(680, 680, 154, 90, Psycho_Cut,Psycho_Blast,Original_Power,Life_Dew,disp_mewtwo,mega_mewtwo)# 90, 100, 60, 0, None, None, "pwup", "restore")
+    lugia=Pokemon(680,680,90,154,Aeroblast,Dragon_Rush,Hydro_Pump,Sky_Attack,disp_lugia,None)#"psychic","flying",100,100,110,140,None,"para",None,"para")
+    entei=Pokemon(580,580,115,85,Eruption,Sacred_Fire,Extrasensory,Scorching_sands,disp_entei,None)
+    raikou=Pokemon(580,580,85,100,Zap_Cannon,Aura_Sphere,Supercell_Slam,Extrasensory,disp_raikou,None)
+    suicune=Pokemon(580,580,90,115,Blizzard,Sheer_cold,Surf,Extrasensory,disp_suicune,None)#")"water",None,110,400*random(),90,80,"freeze","freeze",None,None
+    groudon=Pokemon(670,670,150,140,Precipice_Blades,Eruption,Solar_Beam,Hammer_Arm,disp_groudon,None)
+    kyogre=Pokemon(670,670,150,140,Muddy_water,Origin_Pulse,Water_Spout,Ice_Beam,disp_kyogre,None)#","water",None,90,110,150,90,None,None,None,"freeze")
+    rayquaza=Pokemon(680,680,150,90,Dragon_Acsent,Draco_Meteor,Storm,Hyper_Beam,disp_rayquaza,mega_rayquaza)#"dragon","flying",120,130,110,150,None,"pwup","para",None)
+    deoxys=Pokemon(600,600,180,160,Psycho_Boost,Hyper_Beam,Meteor_Beam,Focus_Blast,disp_deoxys,None)#","psychic",None,140,150,120,120,"pwdn",None,"pwup","pwdn")
+    palkia=Pokemon(680,680,150,120,Earth_Power,Spacial_Rend,Hydro_Pump,Ice_Beam,disp_palkia,None)#","water","dragon",90,150,110,90,"pwdn","pwdn",None,"freeze")
+    dialga=Pokemon(680, 680, 150, 120,Roar_Of_Time,Iron_Tail,Flash_Cannon,Blizzard,disp_dialga,None)#","steel","dragon",150,100,80,110,None,"pwdn","pwdn","freeze")
+    giratina=Pokemon(680,680,120,120,Shadow_Force,Aura_Sphere,Stone_Edge,Poltergeist,disp_giratina,None)#","ghost","dragon",120,80,100,110,"pwdn",None,"pwup","para")
+    darkrai=Pokemon(600,600,135,90,Dream_Eater,Dark_void,Thunder,Sludge_Bomb,disp_darkrai,None)#","dark",None,100,0,110,90,"sleep","deep sleep","para","poison")
+    cresselia=Pokemon(600,600,75,130,Moonblast,Future_Sight,Lunar_Blessing,Lunar_Dance,disp_cresselia,None)#","psychic",None,95,120,0,0,"pwdn",None,"complete restore","restore")
+    zekrom=Pokemon(680,680,150,120,Bolt_Strike,Fusion_Bolt,Draco_Meteor,Scale_Shot,disp_zekrom,mega_zekrom)#","electric","dragon",130,100,130,45*randint(1,5),"para","para","pwup",None)
+    reshiram=Pokemon(680, 680,150,120,Blue_Flare,Fusion_Flame,Draco_Meteor,Overheat,disp_reshiram,mega_reshiram)#","fire","dragon",130,100,130,130,"flame","flame","pwup","pwdn")
+    kyurem=Pokemon(660,660,170,100,Glaciate,Blizzard,Stone_Edge,Draco_Meteor,disp_kyurem,None)#","ice","dragon",90,110,100,130,"pwdn","freeze",None,"pwup")
+    xerneas=Pokemon(680,680,131,98,Geomancy,Moonblast,Close_Combat,Thunder,disp_xerneas,None)#","fairy",None,50,95,120,110,("restore" and "pwup"), "pwdn","pwdn","para")
+    zygarde=Pokemon(708,708,100,216,Lands_Wrath,Thousand_Arrows,Thousand_Waves,Core_Enforcer,disp_zygarde,mega_zygarde)#","ground","dragon",90,135,90,100,"pwdn","pwup","para","pwdn")
+    zacian=Pokemon(720,720,170,148,Behemoth_Blade,Moonblast,Hyper_Beam,Steel_Beam,piczacian,mega_zacian)#","fairy","steel",100,95,150,140,"pwup","pwdn","pwup","pwup")
+    miraidon=Pokemon(680,680,135,135,Electro_Drift,Overheat,Outrage,Solar_Blade,picmiraidon,None)#","electric","dragon",100,130,120,120,("pwup" and "para"),("pwdn" and "flame"),("para" and "pwup"),("pwup" and "pwdn"))
+
+
+
+"""run the whole game loop"""
+
+
+run_game()
+
